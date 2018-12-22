@@ -7,31 +7,46 @@
 // author: Will Assad, email: willassadcode@gmail.com
 //*******************************************************************
 
-public class Main {
+//inherit AssadFunctions
+public class Main extends AssadFunctions{
 
     public static void main(String[] args) {
-        //use to get helper functions
-        AssadFunctions f = new AssadFunctions();
 
         //test string input from user
-        String var = f.scanstring("Enter string: ");
+        String var = scanString("Enter string: ");
         //test integer input between 1 and 10
-        int x = f.scaninteger("Enter integer: ",1,10);
+        int x = scanInteger("Enter integer: ",1,10);
         //test double input between 3 and 6
-        double y = f.scandouble("Enter double: ",3,6);
+        double y = scanDouble("Enter double: ",3,6);
 
         //Test format printing
-        f.print("var is %s, x is %s, y is %s.", var,x,y);
+        print("var is %s, x is %s, y is %s.", var,x,y);
+
+        //test remove substring from string
+        String someString = "hello there!";
+        someString = remove(someString, "there!", "\\s");
+        print(someString);
 
         //test random integer
-        int random = f.randint(20,30);
-        f.print(random);
+        int random = randint(20,30);
+        print(random);
 
         //test rounding
         double decimal = 5.93827434;
-        double rounded = f.round(decimal,2);
-        f.print(rounded);
+        double rounded = round(decimal,2);
+        print(rounded);
 
+        //check if string is a palindrome
+        print(palindrome("never, odd, or even!"));
 
+        //test combining arrays
+        int[] array1 = {1,2,3,4};
+        int[] array2 = {5,6,7,8};
+        print(combineArrays(array1,array2));
+
+        //test arrayContains method
+        String[] array = {"hello","bye"};
+        print(arrayContains(array, "hello"));
+        
     }
 }
