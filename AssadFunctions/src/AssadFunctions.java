@@ -1,14 +1,12 @@
 //*******************************************************************
-//  TESTING ASSADFUNCTIONS
+//  AssadFunctions
 //
 // Simplify java functions that require many lines of code.
-// RECOMMENDED for new java programmers (some lack efficiency).
+// RECOMMENDED for simple java programmers (some lack efficiency).
 //
-// author: Will Assad, email: willassadcode@gmail.com
 //*******************************************************************
 
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
+import com.sun.istack.internal.NotNull;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -21,33 +19,52 @@ import java.util.stream.IntStream;
 @Author(
         name = "Will Assad",
         date = "12/21/2018",
-        email = "willassadcode@gmail.com"
+        email = "willassadcode@gmail.com",
 )
 
-//This class is used to manipulate various data types at ease
+
+/* HOW TO USE AssadFunctions:
+
+ public class Main extends AssadFunctions {
+
+    public static void main(String[] args) {
+        //call any functions here
+    }
+
+ }
+ */
+
+
+/**
+  DataManipulation class is used to manipulate
+  various data types at ease. Some methods will
+  convert data types from one to another, and
+  others will manipulate existing data.
+ */
+
 class DataManipulation {
 
-    //convert a string to an integer
+    @Simplifier(efficient = false) //convert a string to an integer
     public static int toInt(String integer) {
         return Integer.parseInt(integer);
     }
 
-    //convert a string to a double
+    @Simplifier(efficient = false)  //convert a string to a double
     public static double toDouble(String decimal) {
         return Double.parseDouble(decimal);
     }
 
-    //convert an object to a string
+    @Simplifier(efficient = false)  //convert an object to a string
     public static String toString(Object data) {
         return String.valueOf(data);
     }
 
-    //convert a number to a char array
+    @Simplifier(efficient = false)  //convert a number to a char array
     public static char[] numToArray(int num) {
         return String.valueOf(num).toCharArray();
     }
 
-    //remove substring(s) from a string
+    @Simplifier(efficient = false)  //remove substring(s) from a string
     public static String remove(String string, String... args) {
         for (String arg: args) {
             string = string.replaceAll(arg, "");
@@ -76,20 +93,24 @@ class DataManipulation {
     }
 }
 
-//This class is used to check several conditions
+/**
+ * Conditions class is used to check several conditions.
+ * It can shorten if statements used in programs.
+ */
+
 class Conditions extends DataManipulation{
 
-    //check if an integer is between two values
+    @Simplifier(efficient = false) //check if an integer is between two values
     public static boolean between(int x, int l, int u) {
         return l <= x && x <= u;
     }
 
-    //check if a double is between two values
+    @Simplifier(efficient = false) //check if a double is between two values
     public static boolean between(double x, double l, double u) {
         return l <= x && x <= u;
     }
 
-    //check if an object is a palindrome
+    @Simplifier(efficient = true) //check if an object is a palindrome
     public static boolean palindrome(Object object) {
         String string = toString(object);
         string = remove(string, "[^a-zA-Z0-9]","\\s").toLowerCase();
@@ -100,10 +121,15 @@ class Conditions extends DataManipulation{
 }
 
 
-//This class is used to print anything at ease
+/**
+ * PrintFunctions class is used to print anything
+ * at ease. It can make diagnostic print statements
+ * easier to write when checking for logic errors.
+ */
+
 class PrintFunctions extends Conditions {
 
-    //print any data type, ArrayList, and format strings
+    @OutputVoid //print any data type, ArrayList, and format strings
     public static void print(Object m, Object... args) {
         String type = m.getClass().getName();
 
@@ -117,61 +143,68 @@ class PrintFunctions extends Conditions {
         }
     }
 
-    //print the elements in a double array
+    @OutputVoid //print the elements in a double array
     public static void print(double[] array) {
         System.out.println(Arrays.toString(array));
     }
 
-    //print the elements in a string array
+    @OutputVoid //print the elements in a string array
     public static void print(String[] array) {
         System.out.println(Arrays.toString(array));
     }
 
-    //print the elements in an integer array
+    @OutputVoid //print the elements in an integer array
     public static void print(int[] array) {
         System.out.println(Arrays.toString(array));
     }
 
-    //print the elements in a char array
+    @OutputVoid //print the elements in a char array
     public static void print(char[] array) {
         System.out.println(Arrays.toString(array));
     }
 
-    //print the elements in a boolean array
+    @OutputVoid //print the elements in a boolean array
     public static void print(boolean[] array) {
         System.out.println(Arrays.toString(array));
     }
 
-    //print the elements in a byte array
+    @OutputVoid //print the elements in a byte array
     public static void print(byte[] array) {
         System.out.println(Arrays.toString(array));
     }
 
-    //print the elements in a long array
+    @OutputVoid //print the elements in a long array
     public static void print(long[] array) {
         System.out.println(Arrays.toString(array));
     }
 
-    //print the elements in a float array
+    @OutputVoid //print the elements in a float array
     public static void print(float[] array) {
         System.out.println(Arrays.toString(array));
     }
 
-    //print a blank line using system
+    @OutputVoid //print a blank line using system
     public static void print() {
         System.out.println();
     }
 
+    @OutputVoid //print the type of any object
     public static void printType(Object data) {
         print(data.getClass().getName());
     }
 }
 
 
-//This class is used for really easy user input
+/**
+ * UserInput class is used to take user input
+ * with incredible ease. Strings, double, and
+ * int can all be scanned from the user in
+ * just one line of code.
+ */
+
 class UserInput extends PrintFunctions {
 
-    //take user input of a string and remove substrings from that string
+    @RequiresUserInput(type = "String") //take input of a string and remove substrings
     public static String scanString(String message, String... args){
         Scanner scan = new Scanner(System.in);
         boolean newLine = false;
@@ -190,7 +223,7 @@ class UserInput extends PrintFunctions {
         return string;
     }
 
-    //take the user input of an integer (optional between two values)
+    @RequiresUserInput(type = "int") //take input of an integer (between two values)
     public static int scanInteger(String message, int... args) {
         while(true) {
             try {
@@ -216,7 +249,7 @@ class UserInput extends PrintFunctions {
         }
     }
 
-    //take the user input of a double (optional between two values)
+    @RequiresUserInput(type = "double") //take input of a double (between two values)
     public static double scanDouble(String message, double... args) {
         while(true) {
             try {
@@ -243,24 +276,31 @@ class UserInput extends PrintFunctions {
     }
 }
 
+
+/**
+ * AssadArrays class is used to make easy
+ * changes to arrays and ArrayLists when
+ * programming.
+ */
+
 //This class is used for easy use of arrays
 class AssadArrays extends UserInput {
 
-    //combine two integer arrays together using array copy
+    @Simplifier(efficient = false) //combine two integer arrays together using array copy
     public static int[] combineArrays(int[] first, int[] second) {
         int[] result = Arrays.copyOf(first, first.length + second.length);
         System.arraycopy(second, 0, result, first.length, second.length);
         return result;
     }
 
-    //combine two double arrays together using array copy
+    @Simplifier(efficient = false) //combine two double arrays together using array copy
     public static double[] combineArrays(double[] first, double[] second) {
         double[] result = Arrays.copyOf(first, first.length + second.length);
         System.arraycopy(second, 0, result, first.length, second.length);
         return result;
     }
 
-    //combine two string arrays together using array copy
+    @Simplifier(efficient = false) //combine two string arrays together using array copy
     public static String[] combineArrays(String[] first, String[] second) {
         String[] result = Arrays.copyOf(first, first.length + second.length);
         System.arraycopy(second, 0, result, first.length, second.length);
@@ -296,12 +336,12 @@ class AssadArrays extends UserInput {
         return reversed;
     }
 
-    //check if an object array contains a value
+    @Simplifier(efficient = false) //check if an object array contains a value
     public static boolean arrayContains(Object[] array, Object value) {
         return Arrays.asList(array).contains(value);
     }
 
-    //check if an integer array contains a value
+    @Simplifier(efficient = false) //check if an integer array contains a value
     public static boolean arrayContains(int[] array, int value) {
         if (!IntStream.of(array).anyMatch(x -> x == value)) {
             return true;
@@ -309,7 +349,7 @@ class AssadArrays extends UserInput {
         return false;
     }
 
-    //check if a double array contains a value
+    @Simplifier(efficient = false) //check if a double array contains a value
     public static boolean arrayContains(double[] array, double value) {
         if (!DoubleStream.of(array).anyMatch(x -> x == value)) {
             return true;
@@ -317,16 +357,36 @@ class AssadArrays extends UserInput {
         return false;
     }
 
-    //check if a string array contains a value
+    @Simplifier(efficient = false) //check if a string array contains a value
     public static boolean arrayContains(String[] array, String value) {
         return Arrays.stream(array).anyMatch(value::equals);
     }
 
-    //get the max amount of times a value appears in an integer array
+    @Simplifier(efficient = false) //get the max amount of times a value appears in an integer array
     public static int maxValue(int[] array) {
         return Arrays.stream(array).max().getAsInt();
+    }
+
+
+    @Simplifier(efficient = true) //get the sum of all elements in an integer array
+    public static int sumArray(int[] array) {
+        int sum = 0;
+        for (int item : array) {
+            sum += item;
+        }
+        return sum;
+    }
+
+    @Simplifier(efficient = true) //get the sum of all elements in an integer ArrayList
+    public static int sumArray(ArrayList<Integer> array) {
+        int sum = 0;
+        for (int item : array) {
+            sum += item;
+        }
+        return sum;
     }
 }
 
 
+@ExtendsAll
 public class AssadFunctions extends AssadArrays {}
