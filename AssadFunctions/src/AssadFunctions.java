@@ -2,7 +2,7 @@
 //  AssadFunctions
 //
 // Simplify java functions that require many lines of code.
-// RECOMMENDED for simple java programmers (some lack efficiency).
+// RECOMMENDED for simple java programs (some lack efficiency).
 //
 //*******************************************************************
 
