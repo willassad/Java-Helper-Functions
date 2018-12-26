@@ -1,4 +1,4 @@
-package dependencies;//author interface
+//author interface
 
 public @interface Author {
     String name();
